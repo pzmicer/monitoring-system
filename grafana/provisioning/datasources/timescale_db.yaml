@@ -1,0 +1,11 @@
+datasources:
+  - name: "Timescale DB"
+    type: "postgres"
+    url: "$GRAFANA_PORT"
+    user: "$GRAFANA_DB_USER"
+    secureJsonData:
+      password: "$GRAFANA_DB_PASSWORD"
+    jsonData:
+      postgresVersion: 1000
+      timescaledb: true
+      sslmode: "disable"
