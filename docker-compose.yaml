@@ -1,5 +1,5 @@
 services:
-  tm-db:
+  ts-db:
     image: "timescale/timescaledb:2.6.1-pg14"
     restart: "always"
     environment:
@@ -23,6 +23,9 @@ services:
   
   pgadmin:
     image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=iam@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=123
     ports:
       - 5050:80
   
