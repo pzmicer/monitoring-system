@@ -1,8 +1,11 @@
+apiVersion: 1
+
 datasources:
   - name: "Timescale DB"
     type: "postgres"
-    url: "$GRAFANA_PORT"
+    url: "$DATABASE_URL"
     user: "$GRAFANA_DB_USER"
+    database: "$GRAFANA_DB_DB"
     secureJsonData:
       password: "$GRAFANA_DB_PASSWORD"
     jsonData:
