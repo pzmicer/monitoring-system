@@ -9,6 +9,6 @@ datasources:
     secureJsonData:
       password: "$GRAFANA_DB_PASSWORD"
     jsonData:
-      postgresVersion: 1000
+      postgresVersion: 1200
       timescaledb: true
       sslmode: "disable"

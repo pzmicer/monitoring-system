@@ -65,7 +65,6 @@ def publish_message_to_db(args):
             time.sleep(args.frequency)
 
 
-# Read in command-line parameters
 def parse_args():
     parser = argparse.ArgumentParser(description='Script arguments')
     parser.add_argument('--id', help='Device id')

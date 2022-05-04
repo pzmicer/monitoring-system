@@ -1,6 +1,6 @@
 FROM rust:1 as builder
 
-RUN USER=root cargo new --bin rs-client
+RUN cargo new --bin rs-client
 WORKDIR /rs-client
 COPY ./Cargo.toml ./Cargo.toml
 COPY ./src ./src
@@ -8,9 +8,8 @@ RUN cargo build --release
 
 
 FROM debian:buster-slim
-ARG APP=/usr/src/app
-
-WORKDIR ${APP}
+WORKDIR /root/
+COPY --from=builder /rs-client/target/release/rs-client .
 
 ARG host
 ARG port
