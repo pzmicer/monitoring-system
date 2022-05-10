@@ -1,9 +1,17 @@
+<svelte:head>
+    <title>Monitoring system</title>
+</svelte:head>
+
 <div class="center">
-    <h1>Monitoring system.</h1>
+    <h1>Monitoring system</h1>
     <p>
-        This is Home page for my monitoring system. Now it's configured to
+        This is Home page for monitoring system. Now it's configured to
         demonstrate its functionality based on weather data, but it can change
-        in future. <br> 
+        in future. 
+        <br>
+        Current weather data include fields like temperature, wind speed and pressure.
+        New fields can also be added, as well as not only weather data can be stored.
+        <br>
         New features are going to be added here as they appear and ready.
     </p>
 
@@ -29,7 +37,6 @@
     }
 
     .center {
-        /* margin-top: 25%; */
         display: flex;
         flex-direction: column;
         justify-content: center;

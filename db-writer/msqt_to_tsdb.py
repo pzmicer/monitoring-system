@@ -61,8 +61,16 @@ def publish_message_to_db(message_json):
     message = json.loads(message_json.payload)
     # logger.debug("message.payload: {}".format(json.dumps(message_payload, default=date_converter)))
 
-    sql = """INSERT INTO sensor_data(device_id, time, temp_c, pressure_hpa, wind_speed_ms, latitude, longitude)
-                 VALUES (%s, %s, %s, %s, %s, %s, %s);"""
+    sql = """INSERT INTO sensor_data(
+                    device_id, 
+                    time, 
+                    temp_c,
+                    pressure_hpa, 
+                    wind_speed_ms, 
+                    latitude, 
+                    longitude
+                )
+                VALUES (%s, %s, %s, %s, %s, %s, %s);"""
 
     data = (
         message["device_id"], 

@@ -4,10 +4,10 @@ datasources:
   - name: "Timescale DB"
     type: "postgres"
     url: "$DATABASE_URL"
-    user: "$GRAFANA_DB_USER"
-    database: "$GRAFANA_DB_DB"
+    user: "$DB_GRAFANA_USER"
+    database: "$POSTGRES_DB"
     secureJsonData:
-      password: "$GRAFANA_DB_PASSWORD"
+      password: "$DB_GRAFANA_PASSWORD"
     jsonData:
       postgresVersion: 1200
       timescaledb: true

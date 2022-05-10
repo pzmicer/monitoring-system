@@ -11,11 +11,10 @@ FROM debian:buster-slim
 WORKDIR /root/
 COPY --from=builder /rs-client/target/release/rs-client .
 
-ARG host
-ARG port
-ARG id
-ARG let
-ARG lan
-ARG topic
-
-CMD ["./rs-client", "--host $host", "--port $port", "--id $id", "--let $let", "--lan $lan", "--topic $topic"]
+CMD [ "./rs-client", \
+    "--host $MOSQUITTO_HOST", \
+    "--port $MOSQUITTO_PORT", \
+    "--id $DEVICE_ID", \
+    "--lat $LAT", \
+    "--lon $LON", \
+    "--topic $MOSQUITTO_TOPIC" ]
