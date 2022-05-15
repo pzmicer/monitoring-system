@@ -1,0 +1,27 @@
+---
+# file: practice/2.application-abstractions/3.deployment/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitoring
+  template:
+    metadata:
+      labels:
+        app: monitoring
+    spec:
+      containers:
+      - image: monitoring-web:1.0
+        imagePullPolicy: Never
+        name: web
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+...

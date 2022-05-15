@@ -3,6 +3,7 @@ import json
 import logging
 import sys
 from datetime import datetime
+import os
 
 import paho.mqtt.client as mqtt
 import psycopg2
@@ -97,8 +98,10 @@ def publish_message_to_db(message_json):
         conn.close()
 
 
-# Read in command-line parameters
 def parse_args():
+    # Better
+    # print(os.environ['MOSQUITTO_HOST'])
+
     parser = argparse.ArgumentParser(description='Script arguments')
     parser.add_argument('--msqt_topic', help='Mosquitto topic')
     parser.add_argument('--msqt_host', help='Mosquitto host', default='localhost')

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-writer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitoring
+  template:
+    metadata:
+      labels:
+        app: monitoring
+    spec:
+      containers:
+      - image: db-writer:1.0
+        imagePullPolicy: Never
+        name: db-writer
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi

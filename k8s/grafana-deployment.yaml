@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitoring
+  template:
+    metadata:
+      labels:
+        app: monitoring
+    spec:
+      containers:
+      - image: grafana/grafana:8.5.2
+        name: grafana
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: dashboards
+          mountPath: /mosquitto/config/
+        - name: provisioning
+          mountPath: /etc/grafana/provisioning/
+        # - name: provisioning-dashboards
+        #   mountPath: /etc/grafana/provisioning/dashboards
+        # - name: provisioning-datasources
+        #   mountPath: /etc/grafana/provisioning/datasources        
+    volumes:
+    - name: dashboards
+      configMap:
+        name: grafana-configmap
+        items:
+        - key: "weather_dashboard.json"
+          path: "weather_dashboard.json"
+    - name: provisioning
+      configMap:
+        name: grafana-configmap
+        items:
+        - key: "default_dashboard.yaml"
+          path: "dashboards/default_dashboard.yaml"
+        - key: "timescaledbs.yaml"
+          path: "datasources/timescale_db.yaml"
+    
