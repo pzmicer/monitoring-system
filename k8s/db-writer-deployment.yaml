@@ -16,6 +16,11 @@ spec:
       - image: db-writer:1.0
         imagePullPolicy: Never
         name: db-writer
+        # command:
+        #   - "env"
+        envFrom:
+        - secretRef:
+            name: env-secret
         resources:
           limits:
             cpu: 100m

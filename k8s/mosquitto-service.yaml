@@ -7,4 +7,4 @@ spec:
   - port: 1881
     targetPort: 1881
   selector:
-    run: monitoring
+    app: monitoring

@@ -20,4 +20,4 @@ CMD python3 main.py \
     --ts_password $POSTGRES_PASSWORD \
     --ts_database $POSTGRES_DB
 
-# CMD [ "env" ]
+# CMD [ "bash" ]

@@ -7,5 +7,6 @@ spec:
   - port: 3000
     targetPort: 3000
   selector:
-    run: monitoring
-  # type: NodePort
+    app: monitoring
+  # type: LoadBalancer
+  type: NodePort

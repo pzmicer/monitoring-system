@@ -23,26 +23,26 @@ spec:
             memory: 100Mi
         volumeMounts:
         - name: dashboards
-          mountPath: /mosquitto/config/
+          mountPath: /var/lib/grafana/dashboards/
         - name: provisioning
           mountPath: /etc/grafana/provisioning/
         # - name: provisioning-dashboards
         #   mountPath: /etc/grafana/provisioning/dashboards
         # - name: provisioning-datasources
         #   mountPath: /etc/grafana/provisioning/datasources        
-    volumes:
-    - name: dashboards
-      configMap:
-        name: grafana-configmap
-        items:
-        - key: "weather_dashboard.json"
-          path: "weather_dashboard.json"
-    - name: provisioning
-      configMap:
-        name: grafana-configmap
-        items:
-        - key: "default_dashboard.yaml"
-          path: "dashboards/default_dashboard.yaml"
-        - key: "timescaledbs.yaml"
-          path: "datasources/timescale_db.yaml"
+      volumes:
+      - name: dashboards
+        configMap:
+          name: grafana-configmap
+          items:
+          - key: "weather_dashboard.json"
+            path: "weather_dashboard.json"
+      - name: provisioning
+        configMap:
+          name: grafana-configmap
+          items:
+          - key: "default_dashboard.yaml"
+            path: "dashboards/default_dashboard.yaml"
+          - key: "timescale_db.yaml"
+            path: "datasources/timescale_db.yaml"
     
