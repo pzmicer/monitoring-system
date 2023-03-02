@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: monitoring
+      app: monitoring-db-writer
   template:
     metadata:
       labels:
-        app: monitoring
+        app: monitoring-db-writer
     spec:
       containers:
       - image: db-writer:1.0

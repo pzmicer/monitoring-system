@@ -1,1 +1,36 @@
-# TODO
+apiVersion: v1
+kind: Service
+metadata:
+  name: timescale-db-service
+spec:
+  selector:
+    app: monitoring
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: timescale-db
+spec:
+  serviceName: db-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitoring
+  template:
+    metadata:
+      labels:
+        app: monitoring
+    spec:
+      containers:
+      - image: timescale/timescaledb:2.6.1-pg14
+        name: db
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - secretRef:
+            name: env-secret

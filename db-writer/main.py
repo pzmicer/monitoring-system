@@ -29,6 +29,7 @@ def main():
     client.on_connect = on_connect
     client.on_message = on_message
 
+    print(args.msqt_host, args.msqt_port)
     client.connect(args.msqt_host, args.msqt_port, 60)
 
     # Blocking call that processes network traffic, dispatches callbacks and
@@ -60,7 +61,7 @@ def date_converter(o):
 
 def publish_message_to_db(message_json):
     message = json.loads(message_json.payload)
-    # logger.debug("message.payload: {}".format(json.dumps(message_payload, default=date_converter)))
+    # logger.debug("message.payload: {}".format(json.dumps(message, default=date_converter)))
 
     sql = """INSERT INTO sensor_data(
                     device_id, 
@@ -79,8 +80,8 @@ def publish_message_to_db(message_json):
         message["data"]["temp_c"],
         message["data"]["pressure_hpa"], 
         message["data"]["wind_speed_ms"], 
-        message["coords"]["latitude"],
-        message["coords"]["longitude"],
+        message["coords"]["lat"],
+        message["coords"]["lon"],
     )
 
     try:

@@ -40,6 +40,12 @@ services:
     depends_on:
       - mosquitto
       - db
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 
   # pgadmin:
   #   image: dpage/pgadmin4:6.8

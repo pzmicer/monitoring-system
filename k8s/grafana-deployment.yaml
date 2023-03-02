@@ -6,30 +6,35 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: monitoring
+      app: monitoring-grafana
   template:
     metadata:
       labels:
-        app: monitoring
+        app: monitoring-grafana
     spec:
+      securityContext:
+        # runAsUser: 0
+        fsGroup: 472
+        supplementalGroups:
+          - 0
       containers:
       - image: grafana/grafana:8.5.2
         name: grafana
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+        envFrom:
+          - secretRef:
+              name: env-secret
         resources:
           limits:
-            cpu: 100m
-            memory: 100Mi
+            cpu: 250m
+            memory: 750Mi
         volumeMounts:
         - name: dashboards
           mountPath: /var/lib/grafana/dashboards/
         - name: provisioning
-          mountPath: /etc/grafana/provisioning/
-        # - name: provisioning-dashboards
-        #   mountPath: /etc/grafana/provisioning/dashboards
-        # - name: provisioning-datasources
-        #   mountPath: /etc/grafana/provisioning/datasources        
+          mountPath: /etc/grafana/provisioning/    
       volumes:
       - name: dashboards
         configMap:

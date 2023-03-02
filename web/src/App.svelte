@@ -1,10 +1,10 @@
 <script>
-    let grafana_url = GRAFANA_URL;
+    // let grafana_url = GRAFANA_URL;
 
-    function toGrafana() {
-        console.log(grafana_url);
-        // window.location = grafana_url;
-    }
+    // function toGrafana() {
+    //     console.log(grafana_url);
+    //     window.location = grafana_url;
+    // }
 </script>
 
 <svelte:head>
@@ -12,9 +12,7 @@
 </svelte:head>
 
 <div class="center">
-    <!-- <h1>Monitoring system</h1> -->
-    <!-- <h1>{grafana_url}</h1> -->
-    <h1>{grafana_url} asd</h1>
+    <h1>Monitoring system</h1>
     <p>
         This is Home page for monitoring system. Now it's configured for weather
         data, but it can be changed in future.
@@ -25,8 +23,9 @@
         New features are going to be added here as they appear and ready.
     </p>
 
-    <!-- <button onclick="window.location='http://localhost:3000';">Grafana</button> -->
-    <button on:click={toGrafana}>Grafana</button>
+    <button onclick="window.location='http://localhost:3000';">Grafana</button>
+    <!-- <button onclick="location.href='https://google.com';">Grafana</button> -->
+    <!-- <button on:click={toGrafana}>Grafana</button> -->
 
     <footer>
         GitHub: <a href="https://github.com/pzmicer/monitoring-system"
