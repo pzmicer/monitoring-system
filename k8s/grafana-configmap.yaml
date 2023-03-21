@@ -24,7 +24,7 @@ data:
     datasources:
       - name: "Timescale DB"
         type: "postgres"
-        url: "$DATABASE_URL"
+        url: "$DATABASE_ADDRESS"
         user: "$DB_GRAFANA_USER"
         database: "$POSTGRES_DB"
         secureJsonData:

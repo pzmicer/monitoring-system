@@ -1,19 +1,16 @@
-version: "2"
-
 services:
   db:
     image: timescale/timescaledb:2.6.1-pg14
-    # restart: on-failure
     env_file:
       - .env
-    # volumes:
+    volumes:
+      - db_volume_1:/var/lib/postgresql
     #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
 
   grafana:
     image: grafana/grafana:8.5.2
-    # restart: on-failure
     volumes:
       - "./grafana/provisioning:/etc/grafana/provisioning"
       - "./grafana/dashboards:/var/lib/grafana/dashboards"
@@ -26,7 +23,6 @@ services:
 
   mosquitto:
     image: eclipse-mosquitto:2.0.14
-    # restart: on-failure
     ports:
       - 1881:1881
     volumes:
@@ -34,35 +30,25 @@ services:
 
   db-writer:
     image: db-writer:1.0
-    # restart: on-failure
     env_file:
       - .env
     depends_on:
       - mosquitto
       - db
-    
+
+  api:
+    image: ms-api:1.0
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
   adminer:
     image: adminer
-    restart: always
     ports:
       - 8080:8080
 
-  # pgadmin:
-  #   image: dpage/pgadmin4:6.8
-  #   # restart: on-failure
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
-  #     PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
-  #   ports:
-  #     - 5050:80
-  #   depends_on:
-  #     - db
-
-  # web:
-  #   image: monitoring-system-web:1.0
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - 8080:8080
-  #   depends_on:
-  #     - grafana
+volumes:
+  db_volume_1:
