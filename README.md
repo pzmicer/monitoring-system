@@ -1,9 +1,11 @@
 # Monitoring system
 This is repository for temperature and humidity data monitoring system project.
-This project consists of many different parts, that are described below.
+This project consists of many different parts that are described below.
+
+![](./images/scheme.png)
 
 ## Edge clients
-Edge clients are programs to collect metrics from sensor and send them to server by MQTT protocol.
+Edge clients are programs to collect metrics from sensor and send them to server by MQTT protocol.  
 There are two clients:
 * C client (fast)
 * Python client (slow)
@@ -31,7 +33,7 @@ Api Methods:
 * GET /devices/{device_id}/data?daysago=\<value\>
 
 ## Nginx
-Access to some components is controlled by nginx configured as reverse proxy.
+Access to some components is controlled by nginx which is configured as reverse proxy.
 
 ## Docker and Kubernetes
-All components can be used as Docker containers. They were also configured as Kubernetes Pods so that they can be used in Kubernetes Cluster.
+All components can be used as Docker containers. They were also configured as Kubernetes Pods so they also can be used in Kubernetes Cluster.
