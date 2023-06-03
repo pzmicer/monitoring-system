@@ -11,5 +11,5 @@ RUN apt update && \
     pip3 install -r requirements.txt
 
 COPY app app
-
-CMD uvicorn app.main:app --host 0.0.0.0
+EXPOSE 8000
+CMD uvicorn app.main:app --host 0.0.0.0 --root-path /api

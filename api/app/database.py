@@ -10,6 +10,6 @@ DATABASE_HOST=os.getenv("DATABASE_HOST")
 DATABASE_PORT=os.getenv("DATABASE_PORT")
 
 DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/{POSTGRES_DB}"
-
+# DATABASE_URL = "postgresql://iot_test:iot_test@localhost:5432/iot_test"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

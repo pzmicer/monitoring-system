@@ -5,31 +5,32 @@ services:
       - .env
     volumes:
       - db_volume_1:/var/lib/postgresql
-    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
 
   grafana:
     image: grafana/grafana:8.5.2
     volumes:
-      - "./grafana/provisioning:/etc/grafana/provisioning"
-      - "./grafana/dashboards:/var/lib/grafana/dashboards"
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     env_file:
       - .env
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 3000:3000
     depends_on:
       - db
 
   mosquitto:
     image: eclipse-mosquitto:2.0.14
     ports:
-      - 1881:1881
+      - 1883:1883
     volumes:
-      - "./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
   db-writer:
-    image: db-writer:1.0
+    image: db-writer
+    build: ./db-writer
     env_file:
       - .env
     depends_on:
@@ -37,18 +38,32 @@ services:
       - db
 
   api:
-    image: ms-api:1.0
+    image: ms-api
+    build: ./api
     env_file:
       - .env
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     depends_on:
       - db
 
   adminer:
     image: adminer
+    # ports:
+    #   - 8080:8080
+
+  nginx:
+    image: nginx:1.23.4
+    volumes:
+      - ./nginx/iot.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - 8080:8080
+      - 80:80
+      - 443:443
+    depends_on:
+      - api
+      - grafana
+      - adminer
+
 
 volumes:
   db_volume_1:
